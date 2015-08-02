@@ -37,15 +37,19 @@ set :keep_releases, 2
 #passenger
 set :passenger_restart_with_sudo, true
 
-namespace :deploy do
+before 'deploy:update', 'deploy:update_jekyll'
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
+namespace :deploy do
+  [:start, :stop, :restart, :finalize_update].each do |t|
+    desc "#{t} task is a no-op with jekyll"
+    task t, :roles => :app do ; end
   end
 
+  desc 'Run jekyll to update site before uploading'
+  task :update_jekyll do
+    # clear existing _site
+    # build site using jekyll
+    # remove Capistrano stuff from build
+    %x(rm -rf _site/* && jekyll build && rm _site/Capfile && rm -rf _site/config)
+  end
 end
