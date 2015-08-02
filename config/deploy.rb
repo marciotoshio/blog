@@ -42,7 +42,7 @@ namespace :deploy do
   task :update_jekyll do
     on roles(:app) do
       within "#{deploy_to}/current" do
-        execute :jekyll, "build"
+        %x(rm -rf _site/* && jekyll build && rm _site/Capfile && rm -rf _site/config)
       end
     end
   end
