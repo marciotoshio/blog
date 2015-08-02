@@ -42,11 +42,10 @@ namespace :deploy do
   task :update_jekyll do
     on roles(:app) do
       within "#{deploy_to}/current" do
-        %x(rm -rf _site/* && jekyll build && rm _site/Capfile && rm -rf _site/config)
+        %x(jekyll build)
       end
     end
   end
-
 end
 
 after "deploy:symlink:release", "deploy:update_jekyll"
