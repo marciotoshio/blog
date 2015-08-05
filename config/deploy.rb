@@ -43,7 +43,7 @@ namespace :deploy do
   task :update_jekyll do
     on roles(:app) do
       within "#{deploy_to}/current" do
-        execute :jekyll, 'build'
+        execute '~/.rvm/bin/rvm ruby-2.2.1@blog do jekyll build'
       end
     end
   end
