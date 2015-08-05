@@ -38,9 +38,6 @@ set :keep_releases, 2
 set :rvm_type, :user
 set :rvm_ruby_version, 'ruby-2.2.1@blog'
 
-#passenger
-set :passenger_restart_with_sudo, true
-
 set :format, :pretty
 namespace :deploy do
   task :update_jekyll do
