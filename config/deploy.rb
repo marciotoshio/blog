@@ -42,8 +42,8 @@ set :format, :pretty
 namespace :deploy do
   task :update_jekyll do
     on roles(:app) do
-      within "#{deploy_to}/current" do
-        execute '~/.rvm/bin/rvm ruby-2.2.1@blog do jekyll build'
+      within release_path do
+        execute "~/.rvm/bin/rvm ruby-2.2.1@blog do jekyll --destination #{release_path}/_site"
       end
     end
   end
