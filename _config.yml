@@ -11,8 +11,3 @@ github_username:  marciotoshio
 
 # Build settings
 markdown: kramdown
-
-analytics :
-  provider : google
-  google : 
-      tracking_id : 'UA-23032107-6'
